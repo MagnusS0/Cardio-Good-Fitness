@@ -30,7 +30,7 @@ Before building any model, I did some exploratory data analysis (EDA) to underst
 - The customers who bought TM195 or TM498 have similar characteristics except for miles and age. Those who bought TM498 expect to run more miles per week than those who bought TM195 (83 vs 88 miles)
 - The customers who baught TM798 where mostly male. 
 ![image](https://user-images.githubusercontent.com/97634880/226214718-0b8d2823-08ca-451a-94f1-f23759b1444f.png)
-![image](https://user-images.githubusercontent.com/97634880/226214750-b4402ce2-2a74-4217-a4da-2665c6b9f695.png)
+![image](https://user-images.githubusercontent.com/97634880/226214988-d95f309e-4ed0-46ee-9c14-534796490ffa.png)
 
 
 ## Data Preprocessing
