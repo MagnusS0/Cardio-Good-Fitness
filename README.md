@@ -34,8 +34,8 @@ Before building any model, I did some exploratory data analysis (EDA) to underst
 
 Before building any model, I also did some data preprocessing steps to prepare the data for machine learning algorithms. These steps include:
 
-- Covert object data types to categorical data type using '.astype('category')' 
-- Encoding categorical variables (Product, Gender, Marital Status, Fitness Level (1-5)) into numerical values using LabelEncoder from scikit-learn library, and creating 'target = cardio_df['Product'] = le.fit_transform(cardio_df['Product'])'
+- Covert object data types to categorical data type using `.astype('category')`
+- Encoding categorical variables (Product, Gender, Marital Status, Fitness Level (1-5)) into numerical values using LabelEncoder from scikit-learn library, and creating `target = cardio_df['Product'] = le.fit_transform(cardio_df['Product'])`
 - Dropping the Product column from the table 
 - Splitting the data into training and testing sets using train_test_split from scikit-learn library
 - Scaling numerical variables (Miles, Fitness, Usage, Income, Age, Education) using StandardScaler from scikit-learn library
