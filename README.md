@@ -28,6 +28,9 @@ Before building any model, I did some exploratory data analysis (EDA) to underst
 - The data set has no missing values.
 - The customers who bought TM798 have higher income, fitness level, usage, and education than those who bought TM195 or TM498.
 - The customers who bought TM195 or TM498 have similar characteristics except for miles and age. Those who bought TM498 expect to run more miles per week than those who bought TM195 (83 vs 88 miles)
+- The customers who baught TM798 where mostly male. 
+![image](https://user-images.githubusercontent.com/97634880/226214718-0b8d2823-08ca-451a-94f1-f23759b1444f.png)
+![image](https://user-images.githubusercontent.com/97634880/226214750-b4402ce2-2a74-4217-a4da-2665c6b9f695.png)
 
 
 ## Data Preprocessing
