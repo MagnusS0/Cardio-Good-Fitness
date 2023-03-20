@@ -11,7 +11,6 @@ The dataset can be found here: https://www.kaggle.com/datasets/saurav9786/cardio
 
 The data set has 8 features and 1 target variable. The features are:
 
-- Product: The product code of the treadmill purchased by the customer.
 - Miles: The average number of miles the customer expects to run each week.
 - Fitness: The self-rated fitness level of the customer on a scale of 1 to 5.
 - Usage: The number of times the customer expects to use the treadmill each week.
@@ -20,6 +19,7 @@ The data set has 8 features and 1 target variable. The features are:
 - Education: The number of years of education completed by the customer.
 - Gender: Male or Female
 - Marital Status: Single or Partnered
+- **Product: The product code of the treadmill purchased by the customer.**
 
 The target variable is Product, which has three possible values: TM195, TM498, and TM798.
 
