@@ -47,7 +47,15 @@ Before building any model, I also did some data preprocessing steps to prepare t
 
 ## Multiclass Model
 
-The first model I built was a multiclass model that predicts which product (TM195, TM498, or TM798) a customer would buy based on their features. To build this model, 
+The first model I built was a multiclass model that predicts which product (TM195, TM498, or TM798) a customer would buy based on their features. To build this model, I first encooded categorical data and dropped the target value from the dataframe. 
+```(from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+target = cardio_df['Product'] = le.fit_transform(cardio_df['Product'])
+target
+cardio_df['Gender'] = le.fit_transform(cardio_df['Gender'])
+cardio_df['MaritalStatus'] = le.fit_transform(cardio_df['MaritalStatus'])
+cardio_df['Fitness'] = le.fit_transform(cardio_df['Fitness']))```
+
 
      
 
