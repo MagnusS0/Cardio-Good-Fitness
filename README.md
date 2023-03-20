@@ -108,6 +108,7 @@ The following classifiers was used:
 - Decision Tree
 - Random Forest
 - Gradient Boosting
+
 To evaluate the trained models I used Accuracy and Mean Cross Validation. 
 
 | Model | Accuracy | Cross Validation |
