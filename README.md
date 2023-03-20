@@ -48,14 +48,25 @@ Before building any model, I also did some data preprocessing steps to prepare t
 ## Multiclass Model
 
 The first model I built was a multiclass model that predicts which product (TM195, TM498, or TM798) a customer would buy based on their features. To build this model, I first encooded categorical data and dropped the target value from the dataframe. 
-```python(from sklearn.preprocessing import LabelEncoder
+```python
+from sklearn.preprocessing import LabelEncoder
 le = LabelEncoder()
 target = cardio_df['Product'] = le.fit_transform(cardio_df['Product'])
 target
 cardio_df['Gender'] = le.fit_transform(cardio_df['Gender'])
 cardio_df['MaritalStatus'] = le.fit_transform(cardio_df['MaritalStatus'])
-cardio_df['Fitness'] = le.fit_transform(cardio_df['Fitness']) ```
-
-
-     
+cardio_df['Fitness'] = le.fit_transform(cardio_df['Fitness']) 
+```
+```python
+cardio_df.drop(['Product'], axis=1, inplace=True)
+#Drop categories that are not needed
+cardio_df.drop(['Gender', 'MaritalStatus'], axis=1, inplace=True)
+cardio_df.head()
+```
+	Age	Education	Usage	Fitness	Income	Miles
+0	18	14	3	3	29562	112
+1	19	15	2	2	31836	75
+2	19	14	4	2	30699	66
+3	19	12	3	2	32973	85
+4	20	13	4	1	35247	47
 
