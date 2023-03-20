@@ -63,10 +63,11 @@ cardio_df.drop(['Product'], axis=1, inplace=True)
 cardio_df.drop(['Gender', 'MaritalStatus'], axis=1, inplace=True)
 cardio_df.head()
 ```
-	|Age|	Education|	Usage|	Fitness|	Income|	Miles|
-0	|18|	14|	3|	3|	29562|	112|
-1	|19|	15|	2|	2|	31836|	75|
-2	|19|	14|	4|	2|	30699|	66|
-3	|19|	12|	3|	2|	32973|	85|
-4	|20|	13|	4|	1|	35247|	47|
+| Age | Education | Usage | Fitness | Income | Miles |
+| --- | --- | --- | --- | --- | --- |
+| 18 | 14 | 3 | 3 | 29562 | 112 |
+| 19 | 15 | 2 | 2 | 31836 | 75 |
+| 19 | 14 | 4 | 2 | 30699 | 66 |
+| 19 | 12 | 3 | 2 | 32973 | 85 |
+| 20 | 13 | 4 | 1 | 35247 | 47 |
 
