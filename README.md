@@ -47,16 +47,19 @@ Before building any model, I also did some data preprocessing steps to prepare t
 
 ## Multiclass Model
 
-The first model I built was a multiclass model that predicts which product (TM195, TM498, or TM798) a customer would buy based on their features. To build this model, I first encooded categorical data and dropped the target value from the dataframe. 
+The first model I built was a multiclass model that predicts which product (TM195, TM498, or TM798) a customer would buy based on their features.
+### Preprocessing
+To build this model, I first encooded categorical data and dropped the target value from the dataframe. 
 ```python
 from sklearn.preprocessing import LabelEncoder
 le = LabelEncoder()
+
 target = cardio_df['Product'] = le.fit_transform(cardio_df['Product'])
-target
 cardio_df['Gender'] = le.fit_transform(cardio_df['Gender'])
 cardio_df['MaritalStatus'] = le.fit_transform(cardio_df['MaritalStatus'])
 cardio_df['Fitness'] = le.fit_transform(cardio_df['Fitness']) 
 ```
+I then dropped Gender and MaritalStatus. (After analyzing the model, I determined that these features did not contribute to the model).
 ```python
 cardio_df.drop(['Product'], axis=1, inplace=True)
 #Drop categories that are not needed
@@ -70,4 +73,28 @@ cardio_df.head()
 | 19 | 14 | 4 | 2 | 30699 | 66 |
 | 19 | 12 | 3 | 2 | 32973 | 85 |
 | 20 | 13 | 4 | 1 | 35247 | 47 |
+
+Next was scaling the data to avoid bias and make sure that models like KNN could be run. 
+```python
+# Scale the data using StandardScaler
+scaler = preprocessing.StandardScaler()
+scaled_df = scaler.fit_transform(cardio_df)
+scaled_df = pd.DataFrame(scaled_df, columns=cardio_df.columns)
+scaled_df.head()
+```
+| Age | Education | Usage | Fitness | Income | Miles |
+| --- | --- | --- | --- | --- | --- |
+| -1.558146 | -0.974987 | -0.421117 | 0.720443 | -1.467585 | 0.170257 |
+| -1.413725 | -0.354854 | -1.345520 | -0.325362 | -1.329438 | -0.545143 |
+| -1.413725 | -0.974987 | 0.503286 | -0.325362 | -1.398512 | -0.719159 |
+| -1.413725 | -2.215254 | -0.421117 | -0.325362 | -1.260365 | -0.351792 |
+| -1.269303 | -1.595120 | 0.503286 | -1.371166 | -1.122218 | -1.086527 |
+
+Beacuse the data set was unbalanced I determind to use under smapling to recuse the majority classes (TM194 and TM498).
+```python
+from imblearn.under_sampling import RandomUnderSampler
+
+rus = RandomUnderSampler(random_state=42)
+X_res, y_res = rus.fit_resample(scaled_df, target)
+```
 
