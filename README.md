@@ -109,6 +109,7 @@ The following classifiers was used:
 - Random Forest
 - Gradient Boosting
 To evaluate the trained models I used Accuracy and Mean Cross Validation. 
+
 | Model | Accuracy | Cross Validation |
 |-------|----------|-----------------|
 | KNN | 0.583333 | 0.644118 |
