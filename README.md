@@ -20,7 +20,7 @@ The data set has 8 features and 1 target variable. The features are:
 - Gender: Male or Female
 - Marital Status: Single or Partnered
 
-The target variable is <span style="color:blue">*Product*</span>, which has three possible values: TM195, TM498, and TM798.
+The target variable is **Product**, which has three possible values: TM195, TM498, and TM798.
 
 ## Data Exploration
 
