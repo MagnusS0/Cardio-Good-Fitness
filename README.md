@@ -102,5 +102,20 @@ X_res, y_res = rus.fit_resample(scaled_df, target)
 X_train, X_test, y_train, y_test = train_test_split(X_res, y_res, test_size=0.3, random_state=42, stratify=y_res)
 ```
 ### Model building
-I first created a pipline that can be used to test multiple algorithms in one go. 
+I first created a pipline that can be used to benchmark differnt classifiers against each other. 
+The following classifiers was used:
+- KNN
+- Decision Tree
+- Random Forest
+- Gradient Boosting
+To evaluate the trained models I used Accuracy and Mean Cross Validation. 
+| Model | Accuracy | Cross Validation |
+|-------|----------|-----------------|
+| KNN | 0.583333 | 0.644118 |
+| Decision Tree | 0.555556 | 0.786029 |
+| Random Forest | 0.611111 | 0.701471 |
+| Gradient Boosting | 0.666667 | 0.786029 |
+
+Based on these accuracys I decided to go on with Decision Tree and Gradient Boosting for hyperparameter tuning. 
+
 
