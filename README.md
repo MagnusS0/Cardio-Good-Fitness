@@ -39,17 +39,7 @@ Before building any model, I did some exploratory data analysis (EDA) to underst
 
 Before building any model, I also did some data preprocessing steps to prepare the data for machine learning algorithms. These steps include:
 
-- Covert object data types to categorical data type using `.astype('category')`
-- Encoding categorical variables (Product, Gender, Marital Status, Fitness Level (1-5)) into numerical values using LabelEncoder from scikit-learn library, and creating `target = cardio_df['Product'] = le.fit_transform(cardio_df['Product'])`
-- Dropping the Product column from the table 
-- Splitting the data into training and testing sets using train_test_split from scikit-learn library
-- Scaling numerical variables (Miles, Fitness, Usage, Income, Age, Education) using StandardScaler from scikit-learn library
-
-## Multiclass Model
-
-The first model I built was a multiclass model that predicts which product (TM195, TM498, or TM798) a customer would buy based on their features.
-### Preprocessing
-#### 1. To build this model, I first encooded categorical data and dropped the target value from the dataframe. 
+#### 1. I first encooded categorical data and dropped the target value from the dataframe. 
 ```python
 from sklearn.preprocessing import LabelEncoder
 le = LabelEncoder()
@@ -74,7 +64,7 @@ cardio_df.head()
 | 19 | 12 | 3 | 2 | 32973 | 85 |
 | 20 | 13 | 4 | 1 | 35247 | 47 |
 
-#### 3. Next was scaling the data to avoid bias and make sure that models like KNN could be run. 
+#### 3. Next was scaling the data to avoid bias and make sure that models like e.g. KNN could be run. 
 ```python
 # Scale the data using StandardScaler
 scaler = preprocessing.StandardScaler()
@@ -101,6 +91,11 @@ X_res, y_res = rus.fit_resample(scaled_df, target)
 ```python
 X_train, X_test, y_train, y_test = train_test_split(X_res, y_res, test_size=0.3, random_state=42, stratify=y_res)
 ```
+
+## Multiclass Model
+
+The first model I built was a multiclass model that predicts which product (TM195, TM498, or TM798) a customer would buy based on their features.
+
 ### Model building
 I first created a pipline that can be used to benchmark differnt classifiers against each other. 
 The following classifiers was used:
