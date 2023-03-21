@@ -49,7 +49,7 @@ Before building any model, I also did some data preprocessing steps to prepare t
 
 The first model I built was a multiclass model that predicts which product (TM195, TM498, or TM798) a customer would buy based on their features.
 ### Preprocessing
-1. To build this model, I first encooded categorical data and dropped the target value from the dataframe. 
+#### 1. To build this model, I first encooded categorical data and dropped the target value from the dataframe. 
 ```python
 from sklearn.preprocessing import LabelEncoder
 le = LabelEncoder()
@@ -59,7 +59,7 @@ cardio_df['Gender'] = le.fit_transform(cardio_df['Gender'])
 cardio_df['MaritalStatus'] = le.fit_transform(cardio_df['MaritalStatus'])
 cardio_df['Fitness'] = le.fit_transform(cardio_df['Fitness']) 
 ```
-2. I then dropped Gender and MaritalStatus. (After analyzing the model, I determined that these features did not contribute to the model).
+#### 2. I then dropped Gender and MaritalStatus. (After analyzing the model, I determined that these features did not contribute to the model).
 ```python
 cardio_df.drop(['Product'], axis=1, inplace=True)
 #Drop categories that are not needed
@@ -74,7 +74,7 @@ cardio_df.head()
 | 19 | 12 | 3 | 2 | 32973 | 85 |
 | 20 | 13 | 4 | 1 | 35247 | 47 |
 
-3. Next was scaling the data to avoid bias and make sure that models like KNN could be run. 
+#### 3. Next was scaling the data to avoid bias and make sure that models like KNN could be run. 
 ```python
 # Scale the data using StandardScaler
 scaler = preprocessing.StandardScaler()
@@ -90,14 +90,14 @@ scaled_df.head()
 | -1.413725 | -2.215254 | -0.421117 | -0.325362 | -1.260365 | -0.351792 |
 | -1.269303 | -1.595120 | 0.503286 | -1.371166 | -1.122218 | -1.086527 |
 
-4. Beacuse the data set was unbalanced I determind to use under smapling to recuse the majority classes (TM194 and TM498).
+#### 4. Beacuse the data set was unbalanced I determind to use under smapling to recuse the majority classes (TM194 and TM498).
 ```python
 from imblearn.under_sampling import RandomUnderSampler
 
 rus = RandomUnderSampler(random_state=42)
 X_res, y_res = rus.fit_resample(scaled_df, target)
 ```
-5. Then only one step was left and that was splitting the data into a train and test set (70/30).
+#### 5. Then only one step was left and that was splitting the data into a train and test set (70/30).
 ```python
 X_train, X_test, y_train, y_test = train_test_split(X_res, y_res, test_size=0.3, random_state=42, stratify=y_res)
 ```
@@ -109,15 +109,16 @@ The following classifiers was used:
 - Linear Regression
 - SVM
 
+Becasue of the small size of the datset more complex classifiers like Random Forest and Gradient Boosting were not used.
 To evaluate the trained models I used Accuracy and Mean Cross Validation. 
 
 | Model | Training Accuracy | Accuracy | Cross Validation |
 |-------|-------------------|----------|------------------|
 | KNN | 0.7976619 | 0.583333 | 0.644118 |
 | Decision Tree | 0.892857 | 0.611111 | 0.750735 |
-| Random Forest | 0.785714 | 0.694444 | 0.701471 |
-| Gradient Boosting | 0.738095 | 0.611111 | 0.714706 |
+| Linear Regression | 0.785714 | 0.694444 | 0.701471 |
+| SVM | 0.738095 | 0.611111 | 0.714706 |
 
-Based on these accuracys I decided to go on with Decision Tree and Gradient Boosting for hyperparameter tuning. 
+### Hyperparameter tuning
 
 
