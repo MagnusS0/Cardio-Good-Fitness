@@ -106,17 +106,17 @@ I first created a pipline that can be used to benchmark differnt classifiers aga
 The following classifiers was used:
 - KNN
 - Decision Tree
-- Random Forest
-- Gradient Boosting
+- Linear Regression
+- SVM
 
 To evaluate the trained models I used Accuracy and Mean Cross Validation. 
 
 | Model | Training Accuracy | Accuracy | Cross Validation |
 |-------|-------------------|----------|------------------|
-| KNN | 0.797661 | 0.583333 | 0.644118 |
-| Decision Tree | 0.89285 | 0.555556 | 0.786029 |
-| Random Forest | 0.78571 | 0.611111 | 0.701471 |
-| Gradient Boosting | 0.73809 | 0.666667 | 0.786029 |
+| KNN | 0.7976619 | 0.583333 | 0.644118 |
+| Decision Tree | 0.892857 | 0.611111 | 0.750735 |
+| Random Forest | 0.785714 | 0.694444 | 0.701471 |
+| Gradient Boosting | 0.738095 | 0.611111 | 0.714706 |
 
 Based on these accuracys I decided to go on with Decision Tree and Gradient Boosting for hyperparameter tuning. 
 
