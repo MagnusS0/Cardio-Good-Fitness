@@ -115,5 +115,25 @@ To evaluate the trained models I used Accuracy and Mean Cross Validation.
 | SVM | 0.738095 | 0.611111 | 0.714706 |
 
 ### Hyperparameter tuning
+To improve the performance of the multiclass model, I performed hyperparameter tuning using GridSearchCV from the Scikit-learn library.
+```python
+#Grid search for logistic regression
+param_grid = {
+    'C': [0, 0.01, 0.1, 0,5, 1, 5, 10],
+    'solver': ['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga'],
+    'random_state': [42],
+    'multi_class': ['multinomial'],
+    'penalty': ['l1', 'l2', 'elasticnet', 'none'],
+    'max_iter': [100, 200, 300],
+    }
+
+# Create a logistic regression classifier
+logreg = LogisticRegression()
+
+# Create a grid search object
+grid_search = GridSearchCV(logreg, param_grid, cv=5,)
+# Fit the grid search object to the data
+grid_search.fit(X_train, y_train)
+```
 
 
