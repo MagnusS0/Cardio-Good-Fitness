@@ -26,7 +26,7 @@ The target variable is **Product**, which has three possible values: TM195, TM49
 
 ## Data Exploration
 
-Before building any model, I did some exploratory data analysis (EDA) to understand the distribution and relationship of the variables. I used Python and Pandas library to perform some basic statistics and Matplotlib, Seaborn and Tableau for visualization. Here are some of the findings from my EDA:
+Before building any model, I did some exploratory data analysis (EDA) to understand the distribution and relationship of the variables. I used Python and Pandas library to perform some basic statistics and Matplotlib, Seaborn and [Tableau](https://public.tableau.com/app/profile/magnus.samuelsen/viz/Fitness_Customer_Dashboard/Dashboard1) for visualization. Here are some of the findings from my EDA:
 
 - The data set has no missing values.
 - The customers who bought TM798 have higher income, fitness level, usage, and education than those who bought TM195 or TM498.
@@ -41,7 +41,7 @@ Before building any model, I did some exploratory data analysis (EDA) to underst
 
 Before building any model, I also did some data preprocessing steps to prepare the data for machine learning algorithms. These steps include:
 
-#### 1. I first encooded categorical data and dropped the target value from the dataframe. 
+#### 1. I first encooded categorical data and created the target variable. 
 ```python
 from sklearn.preprocessing import LabelEncoder
 le = LabelEncoder()
@@ -51,7 +51,7 @@ cardio_df['Gender'] = le.fit_transform(cardio_df['Gender'])
 cardio_df['MaritalStatus'] = le.fit_transform(cardio_df['MaritalStatus'])
 cardio_df['Fitness'] = le.fit_transform(cardio_df['Fitness']) 
 ```
-#### 2. I then dropped Gender and MaritalStatus. (After analyzing the model, I determined that these features did not contribute to the model).
+#### 2. I then dropped the target colum Product form the dataframe as well as Gender and MaritalStatus. (After analyzing the model, I determined that these features did not contribute to the model).
 ```python
 cardio_df.drop(['Product'], axis=1, inplace=True)
 #Drop categories that are not needed
@@ -82,7 +82,7 @@ scaled_df.head()
 | -1.413725 | -2.215254 | -0.421117 | -0.325362 | -1.260365 | -0.351792 |
 | -1.269303 | -1.595120 | 0.503286 | -1.371166 | -1.122218 | -1.086527 |
 
-#### 4. Beacuse the data set was unbalanced I determind to use under smapling to recuse the majority classes (TM194 and TM498).
+#### 4. Beacuse the data set was unbalanced I determind to use under smapling to reduse the majority classes (TM194 and TM498).
 ```python
 from imblearn.under_sampling import RandomUnderSampler
 
@@ -105,6 +105,32 @@ The following classifiers was used:
 - Decision Tree
 - Linear Regression
 - SVM
+```python
+#Create a list with all the models
+model_pipeline = []
+model_pipeline.append(KNeighborsClassifier())
+model_pipeline.append(DecisionTreeClassifier(random_state=42))
+model_pipeline.append(LogisticRegression(random_state=42))
+model_pipeline.append(SVC(random_state=42))
+
+
+#Create the list of models and the accuracy of each model
+model_list = ['KNN', 'Decision Tree', 'Logistic Regression', 'SVM']
+traning_accuracy_list = []
+accuracy_list = []
+mean_corss_val=[]
+
+for model in model_pipeline:
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    traning_accuracy_list.append(model.score(X_train, y_train))
+    accuracy_list.append(metrics.accuracy_score(y_test, y_pred))
+    scores = cross_val_score(model, X_train, y_train, cv=5)
+    mean_corss_val.append(scores.mean())
+
+#And now compare the performance of the models in a dataframe
+result_df = pd.DataFrame({'Model': model_list,'Traning Accuracy':traning_accuracy_list ,'Accuracy': accuracy_list, 'Cross Validation': mean_corss_val})
+```
 
 Becasue of the small size of the datset more complex classifiers like Random Forest and Gradient Boosting were not used.
 To evaluate the trained models I used Accuracy and Mean Cross Validation. 
@@ -139,7 +165,7 @@ grid_search.fit(X_train, y_train)
 ```
 
 ### Results
-After training and tuning the logistic regression model perfomece the best, the following performance was achieved:
+After training and tuning, the logistic regression model perfomece the best, the following performance was achieved:
 ### Logistic Regression Model
 
 - Training Accuracy: 0.7857
@@ -154,7 +180,7 @@ After training and tuning the logistic regression model perfomece the best, the 
 |-----|-----------|--------|----------|---------|
 | Avg |   0.75    |  0.75  |   0.75   |    36   |
 
-The classification report shows that the model has a high precision and recall for class 2 (TM798), which could be due to the fact that this class has more distinct features, making it easier to distinguish from the others. The precision and recall for classes 0 and 1 are lower, indicating that the model may have more difficulty distinguishing between these two classes. In the EDA part it is very clear that these two classes have many overlapping features. 
+The classification report shows that the model has a high precision and recall for class 2 (TM798), which could be due to the fact that this class has more distinct features, making it easier to distinguish from the others. The precision and recall for classes 0 (TM195) and 1 (TM498) are lower, indicating that the model may have more difficulty distinguishing between these two classes. In the EDA part it is very clear that these two classes have many overlapping features. Overall the model achieved an accuracy of 0.75 and a cross validation score of 0.7382 on the test set, indicating that it generalizes well to unseen data.
 
 ## Binary Model
 Because of the many similarities between TM 195 and TM478 I decided to merge them and build a binary classification model to predict whether a customer will buy the high-end treadmill (TM798) or not.
@@ -196,12 +222,18 @@ After training and tuning the Super Vector Machine (SVM) model perfomece the bes
 - Accuracy: 1.0
 - Cross Validation Score: 0.9833
 
-|              | precision | recall  | f1-score | support |
-| ------------ | --------- | ------- | -------- | ------- |
-| 0            | 0.80      | 1.00    | 0.89     | 12      |
-| 1            | 1.00      | 0.75    | 0.86     | 12      |
-| accuracy     |           |         | 0.88     | 24      |
-| macro avg    | 0.90      | 0.88    | 0.87     | 24      |
-| weighted avg | 0.90      | 0.88    | 0.87     | 24      |
+|    | precision   | recall   | f1-score   | support   |
+|---|-----------|--------|----------|---------|
+|  0 |     0.96    |    1.00  |    0.98    |     24    |
+|  1 |     1.00    |    0.92  |    0.96    |     12    |
+|   |             |          |            |           |
+|accuracy |            |          |    0.97    |     36    |
+|macro avg |    0.98    |    0.96  |    0.97    |     36    |
+|weighted avg | 0.97    |    0.97  |    0.97    |     36    |
 
-This model achieved high accuracy of 100% on the test set, meaning that all of the predictions made by the model were correct. The results indicate that the SVM model can accurately classify customers based on their treadmill preferences. However, if we look at the F-1 score for TM798 it is acctully worse now than on the multi class model, indicating that  However, it should be noted that the dataset used for this model is relatively small, so these results may not generalize well to larger or more diverse datasets. 
+
+This model achieved high accuracy of 100% on the test set, meaning that all of the predictions made by the model were correct. The results indicate that the SVM model can accurately classify customers based on their treadmill preferences. However, if we look at the F-1 score for TM798 it is acctully worse now than on the multi class model, indicating that  However, it should be noted that the dataset used for this model is relatively small, so these results may not generalize well to larger or more diverse datasets.
+
+
+
+This information could be useful for marketing or sales teams to target potential customers who are looking for a high-end product and offer them personalized promotions or discounts. 
