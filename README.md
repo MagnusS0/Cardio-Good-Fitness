@@ -30,8 +30,8 @@ Before building any model, I did some exploratory data analysis (EDA) to underst
 
 - The data set has no missing values.
 - The customers who bought TM798 have higher income, fitness level, usage, and education than those who bought TM195 or TM498.
-- The customers who bought TM195 or TM498 have similar characteristics except for miles and age. Those who bought TM498 expect to run more miles per week than those who bought TM195 (83 vs 88 miles)
-- The customers who baught TM798 where mostly male. 
+- The customers who bought TM195 or TM498 have similar characteristics except for miles. Those who bought TM498 expect to run more miles per week than those who bought TM195 (83 vs 88 miles)
+- The customers who bought TM798 where mostly male. 
 
 ![image](https://user-images.githubusercontent.com/97634880/226214718-0b8d2823-08ca-451a-94f1-f23759b1444f.png)
 ![image](https://user-images.githubusercontent.com/97634880/226214988-d95f309e-4ed0-46ee-9c14-534796490ffa.png)
@@ -218,9 +218,9 @@ To improve the performance of the already well performing binary models, I perfo
 ## Results
 After training and tuning the Super Vector Machine (SVM) model perfomece the best, the following performance was achieved:
 
-- Training Accuracy: 0.9821
-- Accuracy: 1.0
-- Cross Validation Score: 0.9833
+- Training Accuracy: 1.0
+- Accuracy: 0.9722
+- Cross Validation Score: 1.0
 
 |    | precision   | recall   | f1-score   | support   |
 |---|-----------|--------|----------|---------|
@@ -232,8 +232,21 @@ After training and tuning the Super Vector Machine (SVM) model perfomece the bes
 |weighted avg | 0.97    |    0.97  |    0.97    |     36    |
 
 
-This model achieved high accuracy of 100% on the test set, meaning that all of the predictions made by the model were correct. The results indicate that the SVM model can accurately classify customers based on their treadmill preferences. However, if we look at the F-1 score for TM798 it is acctully worse now than on the multi class model, indicating that  However, it should be noted that the dataset used for this model is relatively small, so these results may not generalize well to larger or more diverse datasets.
+Overall, this model achieved high accuracy of 0.97 and cross-validation score of 1.0 on the test set, meaning that the model makes predictions with confidence and consistency. The results indicate that the SVM model can accurately classify customers based on their treadmill preferences. However, if we look at the F-1 score for TM798, it actually did not improve from the multi-class model, indicating that the multi-class model also did a great job at identifying TM798 customers. This also tells me that the accuracy improvements overall mostly come from merging the two product categories, eliminating the difficulty with distinguishing TM195 and TM498. However, it should be noted that the dataset used for this model is relatively small, so these results may not generalize well to larger or more diverse datasets.
 
 
+## Evaluation and Applicablility
+- The models can be used by marketing or sales teams to target customers based on their preferences and offer them personalized recommendations or promotions.
+- The multi-class model does a good job at identifying TM978 customers but struggled with differentiating between TM195 and TM498.
+- The binary model has better overall accuracy, but it is not better at identifying TM978. Therefore, it is up to preference whether a marketer or sales person should use the multi-class or binary model.
+- However, both models may not be robust enough to handle new or unseen data, as the dataset used for training and testing was small and limited. Therefore, the models should be validated on larger and more diverse datasets before deploying them in real-world scenarios.
 
-This information could be useful for marketing or sales teams to target potential customers who are looking for a high-end product and offer them personalized promotions or discounts. 
+## Conclusion
+In this project, I built two models, a multiclass model and a binary model, to predict the customer product preference based on their demographic and behavioral data.
+
+I started with some basic EDA and built a dashboard with Tableau. 
+Then did some neccesary preprocessing, before splitting the data into a traning and test set.
+I then applied different models to the classification problem and used grid search to perform hyperparameter tuning.
+The final product is a multi class logistic regression model and a SVM binary classification model.
+
+Overall, this project was mainly for the purpose of practicing and experimenting with various techniques, given the small dataset size. Nonetheless, the results from the models can be used as a starting point for further exploration and analysis. This project represents a valuable exercise in data science and machine learning for me, highlighting the importance of careful data preparation, model selection, and evaluation.
