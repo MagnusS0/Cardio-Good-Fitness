@@ -7,6 +7,8 @@
 In this project I created both a multiclass model and a binary model to predict the customer product preference based on their demographic and behavioral data. The data set I used for this project contains information about 180 customers who bought one of three products: TM195, TM498, and TM798. These are different models of treadmills that vary in price and features. 
 The dataset can be found here: https://www.kaggle.com/datasets/saurav9786/cardiogoodfitness
 
+**Disclaimer:** This dataset is relatively small, which makes it challenging to draw strong conclusions about the performance of the models. Therefore, this project is mainly for the purpose of practicing and experimenting with various techniques.
+
 ## Data Description
 
 The data set has 8 features and 1 target variable. The features are:
@@ -136,4 +138,63 @@ grid_search = GridSearchCV(logreg, param_grid, cv=5,)
 grid_search.fit(X_train, y_train)
 ```
 
+### Results
+After training and tuning the logistic regression model perfomece the best, the following performance was achieved:
+### Logistic Regression Model
+
+- Training Accuracy: 0.7857
+- Accuracy: 0.75
+- Cross Validation Score: 0.7382
+
+|     | Precision | Recall | F1-score | Support |
+|-----|-----------|--------|----------|---------|
+|  0  |   0.70    |  0.58  |   0.64   |    12   |
+|  1  |   0.62    |  0.67  |   0.64   |    12   |
+|  2  |   0.92    |  1.00  |   0.96   |    12   |
+|-----|-----------|--------|----------|---------|
+| Avg |   0.75    |  0.75  |   0.75   |    36   |
+
+The classification report shows that the model has a high precision and recall for class 2 (TM798), which could be due to the fact that this class has more distinct features, making it easier to distinguish from the others. The precision and recall for classes 0 and 1 are lower, indicating that the model may have more difficulty distinguishing between these two classes. In the EDA part it is very clear that these two classes have many overlapping features. 
+
+## Binary Model
+Because of the many similarities between TM 195 and TM478 I decided to merge them and build a binary classification model to predict whether a customer will buy the high-end treadmill (TM798) or not.
+```python
+# Merge product TM195 and TM 498 into one category
+cardio_df['Product'] = cardio_df['Product'].replace(['TM195', 'TM498'], 'TM195_TM498')
+cardio_df['Product'].unique()
+```
+### Model building
+Again I created a pipline that can be used to benchmark differnt classifiers against each other. 
+The following classifiers was used:
+- KNN
+- Decision Tree
+- Linear Regression
+- SVM
+
+| Model             | Training Accuracy | Accuracy | Cross Validation |
+|-------------------|-------------------|----------|-----------------|
+| KNN               | 0.982143          | 0.958333 | 0.983333        |
+| Decision Tree     | 1.0               | 0.875    | 0.875758        |
+| SVM               | 0.982143          | 0.958333 | 0.983333        |
+| Logistic Regression | 0.964286       | 0.958333 | 0.983333        |
+
+As expected, the binary classification models achieves higher accuracy than the multi-class one.
+These results indicate that predicting whether a customer will buy the high-end TM798 treadmill or not is a relatively easier task than predicting which of the three treadmills they will choose. 
+
+## Hyperparameter tuning
+To improve the performance of the already well performing binary models, I performed hyperparameter tuning using GridSearchCV. 
+## Results
+After training and tuning the Super Vector Machine (SVM) model perfomece the best, the following performance was achieved:
+
+- Training Accuracy: 0.9821
+- Accuracy: 1.0
+- Cross Validation Score: 0.9833
+
+|              | precision | recall  | f1-score | support |
+| ------------ | --------- | ------- | -------- | ------- |
+| 0            | 0.80      | 1.00    | 0.89     | 12      |
+| 1            | 1.00      | 0.75    | 0.86     | 12      |
+| accuracy     |           |         | 0.88     | 24      |
+| macro avg    | 0.90      | 0.88    | 0.87     | 24      |
+| weighted avg | 0.90      | 0.88    | 0.87     | 24      |
 
