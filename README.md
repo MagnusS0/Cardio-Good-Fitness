@@ -213,9 +213,9 @@ The following classifiers was used:
 As expected, the binary classification models achieves higher accuracy than the multi-class one.
 This make sense as the model no longer has to deal with distinguishing between TM195 and TM498.
 
-## Hyperparameter tuning
+### Hyperparameter tuning
 To improve the performance of the already well performing binary models, I performed hyperparameter tuning using GridSearchCV. 
-## Results
+### Results
 After training and tuning the Super Vector Machine (SVM) model perfomece the best, the following performance was achieved:
 
 - Training Accuracy: 1.0
@@ -237,6 +237,8 @@ Overall, this model achieved high accuracy of 0.97 and cross-validation score of
 
 ## Evaluation and Applicablility
 - The models can be used by marketing or sales teams to target customers based on their preferences and offer them personalized recommendations or promotions.
+![image](https://user-images.githubusercontent.com/97634880/227027292-bc64cdb1-3b79-4898-859e-d1f03d8d7b19.png)
+The image above shows a very simplified example of how the models could be used to effecticly help a marketing or sales department determine what customers should recive personalized recommendations or promotions.
 - The multi-class model does a good job at identifying TM978 customers but struggled with differentiating between TM195 and TM498.
 - The binary model has better overall accuracy, but it is not better at identifying TM978. Therefore, it is up to preference whether a marketer or sales person should use the multi-class or binary model.
 - However, both models may not be robust enough to handle new or unseen data, as the dataset used for training and testing was small and limited. Therefore, the models should be validated on larger and more diverse datasets before deploying them in real-world scenarios.
