@@ -247,6 +247,6 @@ In this project, I built two models, a multiclass model and a binary model, to p
 I started with some basic EDA and built a dashboard with Tableau. 
 Then did some neccesary preprocessing, before splitting the data into a traning and test set.
 I then applied different models to the classification problem and used grid search to perform hyperparameter tuning.
-The final product is a multi class logistic regression model and a SVM binary classification model.
+The final product is a multiclass logistic regression model and a SVM binary classification model.
 
 Overall, this project was mainly for the purpose of practicing and experimenting with various techniques, given the small dataset size. Nonetheless, the results from the models can be used as a starting point for further exploration and analysis. This project represents a valuable exercise in data science and machine learning for me, highlighting the importance of careful data preparation, model selection, and evaluation.
