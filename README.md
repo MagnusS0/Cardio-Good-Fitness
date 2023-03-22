@@ -237,8 +237,7 @@ Overall, this model achieved high accuracy of 0.97 and cross-validation score of
 
 ## Evaluation and Applicablility
 - The models can be used by marketing or sales teams to target customers based on their preferences and offer them personalized recommendations or promotions.
-![image](https://user-images.githubusercontent.com/97634880/227027292-bc64cdb1-3b79-4898-859e-d1f03d8d7b19.png)
-The image above shows a very simplified example of how the models could be used to effecticly help a marketing or sales department determine what customers should recive personalized recommendations or promotions.
+- If a company can collect data on potential customers, the models can predict which products they are most likely to purchase. ML models are capable of making these predictions much faster than humans, making them a valuable tool for marketing and sales teams looking to optimize their targeting strategies.
 - The multi-class model does a good job at identifying TM978 customers but struggled with differentiating between TM195 and TM498.
 - The binary model has better overall accuracy, but it is not better at identifying TM978. Therefore, it is up to preference whether a marketer or sales person should use the multi-class or binary model.
 - However, both models may not be robust enough to handle new or unseen data, as the dataset used for training and testing was small and limited. Therefore, the models should be validated on larger and more diverse datasets before deploying them in real-world scenarios.
