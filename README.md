@@ -163,6 +163,12 @@ Because of the many similarities between TM 195 and TM478 I decided to merge the
 cardio_df['Product'] = cardio_df['Product'].replace(['TM195', 'TM498'], 'TM195_TM498')
 cardio_df['Product'].unique()
 ```
+I also had to change `sampling_strategy` to make sure that the model did not loose information and still capture the true distribution of the data after merging the two classes. I tested this by looking at weighted avg F-1 score that increased e.g. from 0.87 to 0.97 for the SVM model. 
+```python
+rus = RandomUnderSampler(random_state=42, sampling_strategy= {0: 80, 1: 40})
+X_res, y_res = rus.fit_resample(scaled_df, target)
+X_res.shape
+```
 ### Model building
 Again I created a pipline that can be used to benchmark differnt classifiers against each other. 
 The following classifiers was used:
@@ -173,13 +179,13 @@ The following classifiers was used:
 
 | Model             | Training Accuracy | Accuracy | Cross Validation |
 |-------------------|-------------------|----------|-----------------|
-| KNN               | 0.982143          | 0.958333 | 0.983333        |
-| Decision Tree     | 1.0               | 0.875    | 0.875758        |
-| SVM               | 0.982143          | 0.958333 | 0.983333        |
-| Logistic Regression | 0.964286       | 0.958333 | 0.983333        |
+| KNN               | 0.988095         | 0.944444 | 0.976471       |
+| Decision Tree     | 1.0               | 0.972222   | 0.928676        |
+| SVM               | 1.0          | 0.972222 | 0.988235       |
+| Logistic Regression | 1.0      | 0.972222 | 0.988235       |
 
 As expected, the binary classification models achieves higher accuracy than the multi-class one.
-These results indicate that predicting whether a customer will buy the high-end TM798 treadmill or not is a relatively easier task than predicting which of the three treadmills they will choose. 
+This make sense as the model no longer has to deal with distinguishing between TM195 and TM498.
 
 ## Hyperparameter tuning
 To improve the performance of the already well performing binary models, I performed hyperparameter tuning using GridSearchCV. 
@@ -198,3 +204,4 @@ After training and tuning the Super Vector Machine (SVM) model perfomece the bes
 | macro avg    | 0.90      | 0.88    | 0.87     | 24      |
 | weighted avg | 0.90      | 0.88    | 0.87     | 24      |
 
+This model achieved high accuracy of 100% on the test set, meaning that all of the predictions made by the model were correct. The results indicate that the SVM model can accurately classify customers based on their treadmill preferences. However, if we look at the F-1 score for TM798 it is acctully worse now than on the multi class model, indicating that  However, it should be noted that the dataset used for this model is relatively small, so these results may not generalize well to larger or more diverse datasets. 
