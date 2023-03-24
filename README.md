@@ -29,7 +29,7 @@ The target variable is **Product**, which has three possible values: TM195, TM49
 Before building any model, I did some exploratory data analysis (EDA) to understand the distribution and relationship of the variables. I used Python and Pandas library to perform some basic statistics and Matplotlib, Seaborn and [Tableau](https://public.tableau.com/app/profile/magnus.samuelsen/viz/Fitness_Customer_Dashboard/Dashboard1) for visualization. Here are some of the findings from my EDA:
 
 - The data set has no missing values.
-- The customers who bought TM798 have higher income, fitness level, usage, and education than those who bought TM195 or TM498.
+- The customers who bought TM798 have higher income, fitness level, usage, miles and education than those who bought TM195 or TM498.
 - The customers who bought TM195 or TM498 have similar characteristics except for miles. Those who bought TM498 expect to run more miles per week than those who bought TM195 (83 vs 88 miles)
 - The customers who bought TM798 where mostly male. 
 
